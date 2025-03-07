@@ -1,6 +1,4 @@
-Here's your **README.md** file incorporating all the details from your project:  
-
----
+PROJECT: GkBBzHKeuuuJDE41
 
 ### **README.md**  
 
