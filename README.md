@@ -1,160 +1,119 @@
-PROJECT: GkBBzHKeuuuJDE41
+Customer Satisfaction Prediction for a Logistics Startup
 
-### **README.md**  
+Background
 
-```md
-# 🚀 Customer Satisfaction Prediction for a Logistics Startup  
+A company, one of the fastest-growing startups in the logistics and delivery industry, is striving to enhance customer satisfaction and optimize operations as they plan to expand globally. However, predicting customer dissatisfaction remains a challenge, especially when direct feedback is limited.
 
-## 📌 Project Overview  
-A fast-growing logistics and delivery startup is working to enhance **customer satisfaction** and **optimize operations** before expanding globally. However, predicting customer dissatisfaction remains challenging due to limited direct feedback.  
+To address this, a survey was conducted on a select customer cohort, gathering critical data on their experiences. The goal of this machine learning project is to analyze the dataset and build a predictive model that identifies key factors contributing to customer dissatisfaction. By focusing on unhappy customers (target variable = 0), we can proactively improve their services.
 
-To address this, a **survey** was conducted among select customers to gather insights on their experiences. This **machine learning project** aims to analyze the dataset and build a predictive model to identify key factors contributing to **customer dissatisfaction (Class 0)**.  
+The dataset consists of customer feedback attributes (X) and a target variable (Y) that indicates customer satisfaction:
 
----
+Y (Target Variable):
 
-## 🔍 **Dataset Information**  
+0 → Unhappy Customer
 
-The dataset consists of **customer feedback attributes (X)** and a **target variable (Y)** indicating satisfaction:  
-- **Y (Target Variable)**  
-  - **0** → Unhappy Customer  
-  - **1** → Happy Customer  
+1 → Happy Customer
 
-- **Feature Descriptions:**  
-  - **X1:** My order was delivered on time  
-  - **X2:** Contents of my order were as I expected  
-  - **X3:** I ordered everything I wanted to order  
-  - **X4:** I paid a good price for my order  
-  - **X5:** I am satisfied with my courier  
-  - **X6:** The app makes ordering easy for me  
+Feature Descriptions:
 
----
+X1: My order was delivered on time
 
-## 🛠 **Data Processing & Strategy**  
+X2: Contents of my order were as I expected
 
-### **📌 Target Variable**  
-- Binary classification: **0 = Unhappy, 1 = Happy**  
-- **Class Distribution**: No major imbalance (**69 happy vs. 57 unhappy customers**).  
+X3: I ordered everything I wanted to order
 
-### **📌 Preprocessing**  
-- Cleaned and standardized the dataset.  
-- Performed feature scaling where necessary.  
+X4: I paid a good price for my order
 
-### **📌 Dimensionality Reduction via PCA**  
-The **principal components** explain variance as follows:  
-- **PC1: 37%**, **PC2: 19%**, **PC3: 15%**, **PC4: 12%**, **PC5: 10%**, **PC6: 8%**  
+X5: I am satisfied with my courier
 
-### **📌 Recursive Feature Elimination (RFE) Insights**  
-Feature ranking (most to least significant) using `SGDClassifier`:  
-- **X1, X4, X2, X5, X3, X6**  
+X6: The app makes ordering easy for me
 
-#### **Model Testing with Feature Removal (Using NearestCentroid)**  
-| Features Removed | Recall (0) |
-|-----------------|------------|
-| All features included | **58.3%** |
-| Removed weakest feature (**X6**) | **75%** |
-| Further removals (RFE ranking) | **50%, 50%, 66.7%, 66.7%** |
+Data Processing & Strategy
 
-💡 **Key Insight:** The weakest feature, **X6 (Ease of App Usage)**, can be **removed** to improve the model's focus on dissatisfied customers.  
+Target Variable: Binary classification (0 = Unhappy, 1 = Happy).
 
----
+Class Distribution: No major class imbalance (69 happy vs. 57 unhappy customers).
 
-## 🤖 **Modeling Approach**  
+Preprocessing:
 
-### **🎯 Focus**  
-- Prioritizing **recall (0)** to minimize false negatives in predicting **unhappy customers**.  
+Cleaned and standardized the dataset.
 
-### **📊 Evaluation Metrics**  
-✔ **Recall (0) → Primary Metric** (Minimizing false negatives for unhappy customers)  
-✔ **Additional Metrics → Precision, F1-score, Accuracy**  
+Performed feature scaling where necessary.
 
-### **🧪 Models Tested**  
-- **Baseline Models**: Logistic Regression, Decision Trees, Random Forest, XGBoost  
-- **Ensemble Models**: **VotingClassifier** & **StackingClassifier**  
-- **Hyperparameter Tuning**: `Hyperopt` used for best performance  
+Dimensionality Reduction via PCA:
 
-### **🏆 Best Model Selected: `NearestCentroid`**  
+The principal components explain variance as follows:
 
----
+PC1: 37%, PC2: 19%, PC3: 15%, PC4: 12%, PC5: 10%, PC6: 8%.
 
-## 🚀 **Expected Impact**  
+These insights guided feature selection and model optimization.
 
-✅ **Proactively identify unhappy customers** and address their concerns  
-✅ **Optimize delivery operations** based on data-driven insights  
-✅ **Improve overall customer experience** → Increased retention & brand loyalty  
-✅ **Streamline customer surveys** → Focus only on the most important questions  
+Recursive Feature Elimination (RFE) Ranking:
 
----
+Features ranked from most to least significant using SDGClassifier: X1, X4, X2, X5, X3, X6.
 
-## 📂 **Project Structure**  
+Using NearestCentroid, the following recall(0) results were observed:
 
-```
-📦 Customer-Satisfaction-Prediction
-├── 📜 data_preprocessing.py      # Data cleaning & preparation
-├── 📜 pca_analysis.py            # Dimensionality reduction & insights
-├── 📜 ensemble_voting.py         # VotingClassifier evaluation
-├── 📜 ensemble_stacking.py       # StackingClassifier evaluation
-├── 📜 sgd_hyperparam_tuning.py   # Hyperparameter tuning for SGDClassifier
-├── 📜 model_evaluation.py        # Performance comparison of all models
-├── 📜 requirements.txt           # Required dependencies
-├── 📜 README.md                  # Project documentation
-```
+All features included → 58.3% recall(0)
 
----
+Removed weakest feature (X4) → 75% recall(0)
 
-## ⚙️ **Installation & Setup**  
+Further removals of features using the RFE ranking → 50%, 50%, 66.7%, 66.7% recall(0)
 
-1️⃣ **Clone the Repository**  
-```sh
-git clone https://github.com/akindream/Happy-Customers.git
-cd Happy-Customers
-```
+Confusion matrices confirm these results.
 
-2️⃣ **Create a Virtual Environment**  
-```sh
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-```
+Key Insight:
 
-3️⃣ **Install Dependencies**  
-```sh
-pip install -r requirements.txt
-```
+The weakest feature in predicting unhappy customers is X6 (Ease of App Usage). Removing this feature improved recall(0) performance.
 
----
+Modeling Approach
 
-## 🚀 **Usage Guide**  
+Focus: Prioritize identifying unhappy customers (Class 0) to implement targeted service improvements.
 
-### **1️⃣ Run Model Evaluations**  
-- **Voting Classifier**  
-  ```sh
-  python ensemble_voting.py
-  ```
+Feature Selection: Leveraged PCA and RFE for optimal input selection.
 
-- **Stacking Classifier**  
-  ```sh
-  python ensemble_stacking.py
-  ```
+Evaluation Metrics:
 
-- **Hyperparameter Tuning for SGDClassifier**  
-  ```sh
-  python sgd_hyperparam_tuning.py
-  ```
+recall(0) is the primary metric to ensure minimal false negatives for unhappy customers.
 
----
+Other metrics: Precision, F1-score, and accuracy for overall model assessment.
 
-## 📜 **License**  
-This project is licensed under the **MIT License**.  
+Model Selection Process:
 
-```
-MIT License (c) 2025 Braimoh Ernest
-```
+Used LazyPredict for initial benchmarking.
 
----
+Selected top 11 models through 50 iterations with a fixed random seed.
 
-## 👨‍💻 **Author**  
-📧 Email: ernestbraimoh.com  
-🔗 GitHub: [akindream](https://github.com/akindream)  
+Best Performing Models:
 
-```
+NearestCentroid → 92% recall (class 0), 92% accuracy
 
----
+Ensemble Voting Classifier (NearestCentroid, Perceptron, SGDClassifier) → 92% accuracy
+
+Stacking Classifier (NearestCentroid, Perceptron, SGDClassifier) → 83% accuracy
+
+Hyperparameter tuning and cross-validation were applied to ensure optimal model performance.
+
+Final Model: NearestCentroid is the Best Model
+
+Expected Impact
+
+Proactively identify unhappy customers and address their concerns.
+
+Optimize delivery operations based on data-driven insights.
+
+Improve overall customer experience, leading to increased retention and brand loyalty.
+
+Streamline customer feedback questionnaires while maintaining prediction accuracy.
+
+This machine learning project provides a structured approach to predicting dissatisfaction, allowing the company to take corrective measures and enhance customer satisfaction at scale. 🚀
+
+Read More on Medium
+
+For a detailed breakdown of the methodology, read the full article here: Predicting Customer Satisfaction – A Machine Learning Approach
+https://medium.com/@akindream/predicting-customer-satisfaction-a-machine-learning-approach-for-a-growing-logistics-startup-89e6a685717d
+linkedin: www.linkedin.com/in/ernest-braimoh-29284b141
+
+
+
+
