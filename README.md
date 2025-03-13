@@ -77,3 +77,5 @@ This machine learning project provides a structured approach to **predicting dis
 💻 **GitHub Repository:** [Happy Customers](https://github.com/akindream/Happy-Customers)  
 
 👉 **Connect on LinkedIn:** [Ernest Braimoh](www.linkedin.com/in/ernest-braimoh-29284b141)
+
+💻 **YouTube:** [Ernest Braimoh](https://youtu.be/QGmoQVi82s4)
